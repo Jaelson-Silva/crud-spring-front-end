@@ -1,18 +1,43 @@
+import { ToastModule } from 'primeng/toast';
+import { SharedModule } from './shared/shared.module';
+import { MainComponent } from './pages/main.component';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { MenubarModule } from 'primeng-lts/menubar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CreateAccontComponent } from './account/create-accont/create-accont.component';
+import { LoginComponent } from './account/login/login.component';
 import { AppComponent } from './app.component';
+import { AuthenticationComponent } from './layout/authentication/authentication.component';
+
+import { httpInterceptorProviders } from './account/shared/http-interceptors/index';
+import { TopbarComponent } from './shared/components/topbar/topbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    CreateAccontComponent,
+    MainComponent,
+    AuthenticationComponent,
+    TopbarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ToastModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
