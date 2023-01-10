@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { take, tap } from 'rxjs';
+import { first, take, tap } from 'rxjs';
 
-import { Courses } from '../../home/model/course';
+import { Courses } from '../model/course';
 
 @Injectable()
 export class CourseService {
@@ -11,10 +11,14 @@ export class CourseService {
 
     constructor(private http: HttpClient) { }
 
-    getProductsSmall() {
+    List() {
         return this.http.get<Courses[]>(this.API)
         .pipe(
         take(1),
         tap(courses => console.log(courses)))
+    }
+
+    save(record: Courses) {
+        return this.http.post<Courses>(this.API, record).pipe(first())
     }
 }

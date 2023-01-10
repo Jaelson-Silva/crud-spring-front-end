@@ -1,0 +1,86 @@
+<div class="card">
+  <p-table #dtGroup id="dtGroup" [lazy]="true" [loading]="isLoading"
+    [responsive]="true" [value]="courses">
+    <ng-template pTemplate="caption">
+      <div class="table-header d-flex">
+          <div class="table-header text-2xl">
+              Lista de Cursos
+          </div>
+          <div class="table-header text-end ml-auto">
+            <p-button label="novo curso" (click)="showDialogSave()"></p-button>
+          </div>
+      </div>
+  </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Ações</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-courses>
+        <tr>
+            <td>
+              <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
+              <button pButton pRipple type="button" icon="pi pi-file-edit" (click)="showDialogEdit()" class="p-button-rounded p-button-secondary p-button-text ml-1"></button>
+            </td>
+            <td>{{courses.name}}</td>
+            <td>{{courses.category}}</td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<!-- pop-up criação de curso -->
+<form [formGroup]="form">
+  <p-dialog header="Novo Curso" [(visible)]="showDialogSaveCourse" [style]="{width: '50vw'}">
+    <span class="p-float-label mt-4 w-full">
+      <input id="float-input" type="text" formControlName="name" pInputText>
+      <label for="float-input">Nome</label>
+    </span>
+
+    <p-dropdown optionLabel="category" [options]="courses"
+                appendTo="body" formControlName="category"
+                [showClear]="true" placeholder="Selecione a Categoria"
+    ></p-dropdown>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-times"label="cancelar"
+                styleClass="p-button-text p-button-danger"
+                (click)="closeDialog()"
+      ></p-button>
+      <p-button icon="pi pi-check" label="salvar"
+                styleClass="p-button-text"
+                (click)="onSubmit()"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<!-- pop-up editar curso -->
+<p-dialog *ngFor="let item of coursesAux" header="Editar Curso" [(visible)]="showDialogEditCourse" [style]="{width: '50vw'}">
+  <div class="d-flex flex-wrap">
+    <span class="p-float-label mt-4 w-full">
+      <input id="float-input" class="w-full" type="text" [(ngModel)]="item.name" pInputText>
+      <label for="float-input">Nome</label>
+    </span>
+    <span class="p-float-label mt-4 w-full">
+      <input id="float-input" type="text" [(ngModel)]="item.category" pInputText>
+      <label for="float-input">Categoria</label>
+    </span>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+    icon="pi pi-times"
+    label="cancelar"
+    styleClass="p-button-text p-button-danger"
+    (click)="closeDialog()"
+    ></p-button>
+    <p-button
+    icon="pi pi-check"
+    label="salvar"
+    styleClass="p-button-text"
+  ></p-button>
+  </ng-template>
+</p-dialog>
+

@@ -18,7 +18,7 @@ import { NgModule } from '@angular/core';
   exports: [
     CommonModule,
     FormsModule,
-    PrimengModule,
+    PrimengModule
   ]
 })
 export class SharedModule { }

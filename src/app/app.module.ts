@@ -9,19 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { MenubarModule } from 'primeng-lts/menubar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CreateAccontComponent } from './account/create-accont/create-accont.component';
 import { LoginComponent } from './account/login/login.component';
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './layout/authentication/authentication.component';
 
 import { httpInterceptorProviders } from './account/shared/http-interceptors/index';
 import { TopbarComponent } from './shared/components/topbar/topbar.component';
+import { CreateAccountComponent } from './account/create-account/create-accont.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateAccontComponent,
+    CreateAccountComponent,
     MainComponent,
     AuthenticationComponent,
     TopbarComponent,
