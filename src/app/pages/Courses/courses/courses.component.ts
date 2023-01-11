@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { Courses } from './model/course';
 import { CourseService } from './services/courses.service';
@@ -13,25 +13,23 @@ export class CoursesComponent implements OnInit {
 
   public courses: Courses[] = [];
   public coursesAux: Courses[] = [];
-  category = [
-    {category: "frontEnd"},
-    {category: "backend"}
-  ]
 
   public isLoading: boolean = true;
 
   public showDialogSaveCourse: boolean = false;
   public showDialogEditCourse: boolean = false;
 
-  form: FormGroup;
+  public category = [
+    {category: "front-end"},
+    {category: "back-end"}
+  ]
 
-  constructor(private courseService: CourseService, private app: AppComponent, private formBuilder: FormBuilder) {
+  form = this.formBuilder.group({
+    name: [''],
+    category: ['']
+  });
 
-    this.form = this.formBuilder.group({
-      name: [null],
-      category: [null]
-    });
-
+  constructor(private courseService: CourseService, private app: AppComponent, private formBuilder: NonNullableFormBuilder) {
     this.courseService.List().subscribe(res => this.coursesAux = res);
     this.courseService.List().subscribe(
       (res) => {

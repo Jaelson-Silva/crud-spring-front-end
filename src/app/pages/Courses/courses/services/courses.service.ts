@@ -18,7 +18,7 @@ export class CourseService {
         tap(courses => console.log(courses)))
     }
 
-    save(record: Courses) {
+    save(record: Partial<Courses>) {
         return this.http.post<Courses>(this.API, record).pipe(first())
     }
 }
