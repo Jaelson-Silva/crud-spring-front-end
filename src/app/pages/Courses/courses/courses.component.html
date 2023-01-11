@@ -34,13 +34,13 @@
 
 <!-- pop-up criação de curso -->
 <form [formGroup]="form">
-  <p-dialog header="Novo Curso" [(visible)]="showDialogSaveCourse" [style]="{width: '50vw'}">
+  <p-dialog header="Novo Curso" [(visible)]="showDialogSaveCourse">
     <span class="p-float-label mt-4 w-full">
       <input id="float-input" type="text" formControlName="name" pInputText>
       <label for="float-input">Nome</label>
     </span>
 
-    <p-dropdown optionLabel="category" [options]="courses"
+    <p-dropdown optionLabel="category" [options]="category" optionValue="category"
                 appendTo="body" formControlName="category"
                 [showClear]="true" placeholder="Selecione a Categoria"
     ></p-dropdown>
@@ -58,14 +58,14 @@
 </form>
 
 <!-- pop-up editar curso -->
-<p-dialog *ngFor="let item of coursesAux" header="Editar Curso" [(visible)]="showDialogEditCourse" [style]="{width: '50vw'}">
+<p-dialog header="Editar Curso" [(visible)]="showDialogEditCourse">
   <div class="d-flex flex-wrap">
     <span class="p-float-label mt-4 w-full">
-      <input id="float-input" class="w-full" type="text" [(ngModel)]="item.name" pInputText>
+      <input id="float-input" type="text" pInputText>
       <label for="float-input">Nome</label>
     </span>
     <span class="p-float-label mt-4 w-full">
-      <input id="float-input" type="text" [(ngModel)]="item.category" pInputText>
+      <input id="float-input" type="text" pInputText>
       <label for="float-input">Categoria</label>
     </span>
   </div>

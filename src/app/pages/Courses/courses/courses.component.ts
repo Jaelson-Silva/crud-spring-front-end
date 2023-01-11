@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
-import { Courses } from '../model/course';
-import { CourseService } from '../services/courses.service';
+import { Courses } from './model/course';
+import { CourseService } from './services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -13,6 +13,11 @@ export class CoursesComponent implements OnInit {
 
   public courses: Courses[] = [];
   public coursesAux: Courses[] = [];
+  category = [
+    {category: "frontEnd"},
+    {category: "backend"}
+  ]
+
   public isLoading: boolean = true;
 
   public showDialogSaveCourse: boolean = false;
@@ -58,15 +63,18 @@ export class CoursesComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.form.value)
-    this.courseService.save(this.form.value).subscribe(
-      (res) => {
-        console.log(res)
+    this.isLoading = true;
+    this.courseService.save(this.form.value).subscribe({
+      next: res => {
+        this.courses.push(res)
+        this.isLoading = false;
+        this.showDialogSaveCourse = false;
+        this.app.showSuccess('Um novo curso foi criado com sucesso')
       },
-      (error) => {
+      error: error => {
         return this.app.showError(error);
       }
-    )
+    })
   }
 
 }

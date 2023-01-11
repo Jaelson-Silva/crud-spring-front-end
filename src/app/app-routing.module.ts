@@ -3,7 +3,7 @@ import { LoginComponent } from './account/login/login.component';
 import { AuthenticationComponent } from './layout/authentication/authentication.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateAccountComponent } from './account/create-account/create-accont.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
 
 const routes: Routes = [
   {

@@ -1,5 +1,5 @@
 import { CoursesComponent } from './courses/courses.component';
-import { CourseService } from './services/courses.service';
+import { CourseService } from './courses/services/courses.service';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

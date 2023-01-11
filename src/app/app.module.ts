@@ -15,7 +15,7 @@ import { AuthenticationComponent } from './layout/authentication/authentication.
 
 import { httpInterceptorProviders } from './account/shared/http-interceptors/index';
 import { TopbarComponent } from './shared/components/topbar/topbar.component';
-import { CreateAccountComponent } from './account/create-account/create-accont.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
 
 @NgModule({
   declarations: [

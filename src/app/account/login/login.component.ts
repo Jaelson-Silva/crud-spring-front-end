@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
       // navego para rota vazia novamente
 
-      this.app.showSuccess('Seja bem vindo!')
       this.router.navigate(['']);
+      this.app.showSuccess('Seja bem vindo!')
     } catch(error) {
       this.app.showError(error as HttpErrorResponse);
       console.error(error);
