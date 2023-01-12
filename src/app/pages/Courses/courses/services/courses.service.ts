@@ -18,7 +18,15 @@ export class CourseService {
         tap(courses => console.log(courses)))
     }
 
-    save(record: Partial<Courses>) {
+    create(record: Partial<Courses>) {
         return this.http.post<Courses>(this.API, record).pipe(first())
+    }
+
+    getById(id: string) {
+        return this.http.get<Courses>(`${this.API}/${id}`)
+    }
+
+    update(record: Partial<Courses>) {
+      return this.http.put<Courses>(`${this.API}/${record._id}`, record).pipe(first())
     }
 }

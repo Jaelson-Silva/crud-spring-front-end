@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+    <span class="p-float-label mt-4 w-full">
+        <input id="float-input" type="text" formControlName="name"
+                pInputText required>
+        <label for="float-input">Nome</label>
+    </span>
+
+    <p-dropdown optionLabel="category" [options]="category" optionValue="category"
+                appendTo="body" formControlName="category"
+                [showClear]="true" placeholder="Selecione a Categoria"
+    ></p-dropdown>
+
+  <div class="d-flex mt-4 justify-content-end">
+    <p-button icon="pi pi-times"label="cancelar"
+              styleClass="p-button-text p-button-danger"
+              (click)="closeDialog()"
+    ></p-button>
+    <p-button *ngIf="onForm" icon="pi pi-check" label="salvar"
+              styleClass="p-button-text"
+              (click)="onSave()"
+    ></p-button>
+    <p-button *ngIf="!onForm" icon="pi pi-check" label="editar"
+              styleClass="p-button-text"
+              (click)="onEdit(course)"
+    ></p-button>
+  </div>
+</form>

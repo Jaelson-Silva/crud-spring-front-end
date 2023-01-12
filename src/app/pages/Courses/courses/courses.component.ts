@@ -11,23 +11,15 @@ import { CourseService } from './services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
+  public course: Courses[] = [];
   public courses: Courses[] = [];
   public coursesAux: Courses[] = [];
 
   public isLoading: boolean = true;
+  public dialogForm: boolean = false;
 
-  public showDialogSaveCourse: boolean = false;
-  public showDialogEditCourse: boolean = false;
-
-  public category = [
-    {category: "front-end"},
-    {category: "back-end"}
-  ]
-
-  form = this.formBuilder.group({
-    name: [''],
-    category: ['']
-  });
+  public showDialog: boolean = false;
+  public headerDialog?: string;
 
   constructor(private courseService: CourseService, private app: AppComponent, private formBuilder: NonNullableFormBuilder) {
     this.courseService.List().subscribe(res => this.coursesAux = res);
@@ -41,38 +33,36 @@ export class CoursesComponent implements OnInit {
         return this.app.showError(error);
       }
     )
+
+    console.log(this.course)
   }
 
   ngOnInit() {  }
 
   showDialogSave() {
-    this.showDialogSaveCourse = true;
-    this.showDialogEditCourse = false;
+    this.showDialog = true
+    this.dialogForm = true
+    this.headerDialog = 'Novo Curso'
   }
 
-  showDialogEdit() {
-    this.showDialogEditCourse = true;
-    this.showDialogSaveCourse = false;
+  showDialogEdit(event: any) {
+    this.showDialog = true
+    this.dialogForm = false
+    this.headerDialog = 'Editar Curso'
+
+    this.course = event
+
   }
 
   closeDialog() {
-    this.showDialogSaveCourse = false;
-    this.showDialogEditCourse = false;
+      this.showDialog = false;
   }
 
-  onSubmit() {
-    this.isLoading = true;
-    this.courseService.save(this.form.value).subscribe({
-      next: res => {
-        this.courses.push(res)
-        this.isLoading = false;
-        this.showDialogSaveCourse = false;
-        this.app.showSuccess('Um novo curso foi criado com sucesso')
-      },
-      error: error => {
-        return this.app.showError(error);
-      }
-    })
+  save(courses: Courses) {
+    this.courses.push(courses)
   }
 
+  showLoading(res: boolean) {
+    this.isLoading = res;
+  }
 }

@@ -1,5 +1,5 @@
 <div class="card">
-  <p-table #dtGroup id="dtGroup" [lazy]="true" [loading]="isLoading"
+  <p-table id="dtCourses" [lazy]="true" [loading]="isLoading"
     [responsive]="true" [value]="courses">
     <ng-template pTemplate="caption">
       <div class="table-header d-flex">
@@ -22,7 +22,7 @@
         <tr>
             <td>
               <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
-              <button pButton pRipple type="button" icon="pi pi-file-edit" (click)="showDialogEdit()" class="p-button-rounded p-button-secondary p-button-text ml-1"></button>
+              <button pButton pRipple type="button" icon="pi pi-file-edit" (click)="showDialogEdit(courses)" class="p-button-rounded p-button-secondary p-button-text ml-1"></button>
             </td>
             <td>{{courses.name}}</td>
             <td>{{courses.category}}</td>
@@ -33,54 +33,10 @@
 
 
 <!-- pop-up criação de curso -->
-<form [formGroup]="form">
-  <p-dialog header="Novo Curso" [(visible)]="showDialogSaveCourse">
-    <span class="p-float-label mt-4 w-full">
-      <input id="float-input" type="text" formControlName="name" pInputText>
-      <label for="float-input">Nome</label>
-    </span>
-
-    <p-dropdown optionLabel="category" [options]="category" optionValue="category"
-                appendTo="body" formControlName="category"
-                [showClear]="true" placeholder="Selecione a Categoria"
-    ></p-dropdown>
-    <ng-template pTemplate="footer">
-      <p-button icon="pi pi-times"label="cancelar"
-                styleClass="p-button-text p-button-danger"
-                (click)="closeDialog()"
-      ></p-button>
-      <p-button icon="pi pi-check" label="salvar"
-                styleClass="p-button-text"
-                (click)="onSubmit()"
-      ></p-button>
-    </ng-template>
-  </p-dialog>
-</form>
-
-<!-- pop-up editar curso -->
-<p-dialog header="Editar Curso" [(visible)]="showDialogEditCourse">
-  <div class="d-flex flex-wrap">
-    <span class="p-float-label mt-4 w-full">
-      <input id="float-input" type="text" pInputText>
-      <label for="float-input">Nome</label>
-    </span>
-    <span class="p-float-label mt-4 w-full">
-      <input id="float-input" type="text" pInputText>
-      <label for="float-input">Categoria</label>
-    </span>
-  </div>
-  <ng-template pTemplate="footer">
-    <p-button
-    icon="pi pi-times"
-    label="cancelar"
-    styleClass="p-button-text p-button-danger"
-    (click)="closeDialog()"
-    ></p-button>
-    <p-button
-    icon="pi pi-check"
-    label="salvar"
-    styleClass="p-button-text"
-  ></p-button>
-  </ng-template>
+<p-dialog header="{{headerDialog}}" [(visible)]="showDialog">
+  <app-courses-form (cancelForm)="closeDialog()" (saveForm)="save($event)"
+                    (loading)="showLoading($event)" [onForm]="dialogForm"
+                    [course]="course"
+  ></app-courses-form>
 </p-dialog>
 
