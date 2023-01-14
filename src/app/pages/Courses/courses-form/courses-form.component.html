@@ -1,6 +1,6 @@
 <form [formGroup]="form">
     <span class="p-float-label mt-4 w-full">
-        <input id="float-input" type="text" formControlName="name"
+        <input #name id="float-input" type="text" formControlName="name" [disabled]="true"
                 pInputText required>
         <label for="float-input">Nome</label>
     </span>
@@ -11,17 +11,17 @@
     ></p-dropdown>
 
   <div class="d-flex mt-4 justify-content-end">
-    <p-button icon="pi pi-times"label="cancelar"
-              styleClass="p-button-text p-button-danger"
+    <button pButton icon="pi pi-times"label="cancelar"
+              class="p-button-rounded p-button-danger p-button-text"
               (click)="closeDialog()"
-    ></p-button>
-    <p-button *ngIf="onForm" icon="pi pi-check" label="salvar"
-              styleClass="p-button-text"
+    ></button>
+    <button pButton *ngIf="onForm" [disabled]="form.invalid" icon="pi pi-check" label="salvar"
+              class="p-button-text"
               (click)="onSave()"
-    ></p-button>
-    <p-button *ngIf="!onForm" icon="pi pi-check" label="editar"
-              styleClass="p-button-text"
+    ></button>
+    <button pButton *ngIf="!onForm" [disabled]="form.invalid" icon="pi pi-check" label="editar"
+              class="p-button-text"
               (click)="onEdit(course)"
-    ></p-button>
+    ></button>
   </div>
 </form>

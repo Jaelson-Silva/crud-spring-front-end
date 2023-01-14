@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesFormComponent } from './courses-form/courses-form.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -18,7 +19,6 @@ import { CoursesFormComponent } from './courses-form/courses-form.component';
     CommonModule,
     SharedModule,
     CoursesRoutingModule,
-    ReactiveFormsModule
   ],
   providers: [
     CourseService

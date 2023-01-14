@@ -1,4 +1,3 @@
-import { ToastModule } from 'primeng/toast';
 import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './pages/main.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { MenubarModule } from 'primeng-lts/menubar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LoginComponent } from './account/login/login.component';
@@ -16,6 +14,8 @@ import { AuthenticationComponent } from './layout/authentication/authentication.
 import { httpInterceptorProviders } from './account/shared/http-interceptors/index';
 import { TopbarComponent } from './shared/components/topbar/topbar.component';
 import { CreateAccountComponent } from './account/create-account/create-account.component';
+import { LoginFormComponent } from './account/login/login-form/login-form.component';
+import { CreateAccountFormComponent } from './account/create-account/create-account-form/create-account-form.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,8 @@ import { CreateAccountComponent } from './account/create-account/create-account.
     MainComponent,
     AuthenticationComponent,
     TopbarComponent,
+    LoginFormComponent,
+    CreateAccountFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,6 @@ import { CreateAccountComponent } from './account/create-account/create-account.
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastModule,
     SharedModule
   ],
   providers: [

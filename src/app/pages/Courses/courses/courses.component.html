@@ -21,7 +21,7 @@
     <ng-template pTemplate="body" let-courses>
         <tr>
             <td>
-              <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
+              <button pButton pRipple type="button" icon="pi pi-times" (click)="confirm($event, courses._id)" class="p-button-rounded p-button-danger p-button-text"></button>
               <button pButton pRipple type="button" icon="pi pi-file-edit" (click)="showDialogEdit(courses)" class="p-button-rounded p-button-secondary p-button-text ml-1"></button>
             </td>
             <td>{{courses.name}}</td>
@@ -31,12 +31,12 @@
   </p-table>
 </div>
 
-
-<!-- pop-up criação de curso -->
+<!-- pop-up criação e edição de curso -->
 <p-dialog header="{{headerDialog}}" [(visible)]="showDialog">
   <app-courses-form (cancelForm)="closeDialog()" (saveForm)="save($event)"
-                    (loading)="showLoading($event)" [onForm]="dialogForm"
-                    [course]="course"
+                    (editForm)="update($event)"
+                    [onForm]="dialogForm"  [course]="course"
   ></app-courses-form>
 </p-dialog>
 
+<p-confirmPopup></p-confirmPopup>

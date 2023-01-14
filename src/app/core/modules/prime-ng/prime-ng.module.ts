@@ -70,6 +70,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AccordionModule } from 'primeng/accordion';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgModule } from '@angular/core';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -147,8 +148,10 @@ import { NgModule } from '@angular/core';
         TooltipModule,
         TreeTableModule,
         VirtualScrollerModule,
+        ToastModule,
     ],
     exports: [
+        ToastModule,
         ProgressSpinnerModule,
         AccordionModule,
         AutoCompleteModule,

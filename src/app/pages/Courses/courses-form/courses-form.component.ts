@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { Courses } from '../courses/model/course';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CourseService } from '../courses/services/courses.service';
 import { AppComponent } from 'src/app/app.component';
 
@@ -9,79 +9,50 @@ import { AppComponent } from 'src/app/app.component';
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.scss']
 })
-export class CoursesFormComponent implements OnInit {
+export class CoursesFormComponent implements DoCheck {
 
   @Input() onForm: boolean= false;
   @Input() course: any;
   @Output() cancelForm: EventEmitter<boolean> = new EventEmitter();
-  @Output() loading: EventEmitter<boolean> = new EventEmitter();
   @Output() saveForm: EventEmitter<Courses> = new EventEmitter();
+  @Output() editForm: EventEmitter<Courses> = new EventEmitter();
+
+  setEdit: boolean = true
 
   form = this.formBuilder.group({
-    name: [''],
-    category: ['']
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      category: ['', [Validators.required]]
   });
 
   public category = [
-    {category: "front-end"},
-    {category: "back-end"}
+      {category: "front-end"},
+      {category: "back-end"}
   ]
 
-  teste: boolean = true
-
-  constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseService, private app: AppComponent) {
-
-   }
-
-  ngOnInit(): void { }
+  constructor(private formBuilder: NonNullableFormBuilder, private courseService: CourseService, private app: AppComponent) { }
 
   ngDoCheck(): void {
-    if(this.course.name) {
-        this.form.setValue({
-            name: this.course.name,
-            category: this.course.category
-        })
-      this.course = []
-    }
+      if(this.course.name && this.setEdit) {
+          this.form.setValue({
+              name: this.course.name,
+              category: this.course.category
+          })
+          this.setEdit = false
+      }
   }
 
   closeDialog() {
-    this.cancelForm.emit(true)
+      this.cancelForm.emit(true)
   }
 
   onSave() {
-    this.loading.emit(true);
-    this.courseService.create(this.form.value).subscribe({
-      next: res => {
-        this.saveForm.emit(res);
-        this.loading.emit(false);
-        this.cancelForm.emit(true)
-        this.app.showSuccess('Um novo curso foi criado com sucesso')
-      },
-      error: error => {
-        return this.app.showError(error);
-      }
-    })
+      this.saveForm.emit(this.form.value as Courses)
   }
 
   onEdit(event: Courses) {
-    // const payload = event._id
+      const payload: Courses = {...this.form.value, _id: event._id} as Courses
 
-    this.loading.emit(true);
-    this.courseService.update(event).subscribe({
-      next: res => {
-        this.saveForm.emit(res);
-        this.loading.emit(false);
-        // this.showDialogSaveCourse = false;
-        this.cancelForm.emit(true)
-        this.app.showSuccess('Curso editado com sucesso')
-      },
-      error: error => {
-        this.loading.emit(false);
-        return this.app.showError(error);
-      }
-    })
-
+      this.editForm.emit(payload)
   }
 
 }

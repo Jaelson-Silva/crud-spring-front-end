@@ -1,7 +1,7 @@
 import { PrimengModule } from './../core/modules/prime-ng/prime-ng.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 
@@ -14,11 +14,13 @@ import { NgModule } from '@angular/core';
     CommonModule,
     FormsModule,
     PrimengModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
     FormsModule,
-    PrimengModule
+    PrimengModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

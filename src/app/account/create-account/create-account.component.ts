@@ -8,26 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAccountComponent implements OnInit {
 
-  account = {
-    name: '',
-    email: '',
-    password: '',
-  }
-
-  constructor(private accountService: AccountService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  async onSubmit() {
-    try {
-      const result = await this.accountService.createAccount(this.account);
-
-      //mensagem de criação da conta
-      console.log(result)
-    } catch (error) {
-      console.log(error);
-    }
   }
 
 }

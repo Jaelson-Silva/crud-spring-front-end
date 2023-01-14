@@ -12,21 +12,22 @@ export class CourseService {
     constructor(private http: HttpClient) { }
 
     List() {
-        return this.http.get<Courses[]>(this.API)
-        .pipe(
-        take(1),
-        tap(courses => console.log(courses)))
-    }
-
-    create(record: Partial<Courses>) {
-        return this.http.post<Courses>(this.API, record).pipe(first())
+        return this.http.get<Courses[]>(this.API).pipe(first())
     }
 
     getById(id: string) {
         return this.http.get<Courses>(`${this.API}/${id}`)
     }
 
+    create(record: Partial<Courses>) {
+        return this.http.post<Courses>(this.API, record).pipe(first())
+    }
+
     update(record: Partial<Courses>) {
-      return this.http.put<Courses>(`${this.API}/${record._id}`, record).pipe(first())
+        return this.http.put<Courses>(`${this.API}/${record._id}`, record).pipe(first())
+    }
+
+    delete(id: string) {
+        return this.http.delete<Courses>(`${this.API}/${id}`).pipe(first())
     }
 }
