@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private elRef: ElementRef) {
+    this.elRef.nativeElement.style.setProperty('--bs-btn-disabled-bg',           "red", "important")
+
+    // console.log(document.getElementsByClassName("btn:disabled"))
+
+
+   }
 
   ngOnInit(): void {
   }

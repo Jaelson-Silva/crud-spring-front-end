@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../account/shared/auth.guard';
 import { homeComponent } from './home/home.component';
+import { WhiteLabelComponent } from './white-label/white-label.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: homeComponent }
+      { path: 'home', component: homeComponent },
+      { path: 'whiteLabel', component: WhiteLabelComponent }
     ],
     canActivate: [AuthGuard]
   },

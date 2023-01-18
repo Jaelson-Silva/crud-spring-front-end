@@ -1,6 +1,23 @@
-<p-menubar [model]="items">
-  <div>
-      <input type="text" pInputText placeholder="Search">
-      <button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
-  </div>
+
+
+<p-menubar>
+	<div class="d-flex">
+		<div class="mx-3 my-auto">
+			<button pButton pRipple type="button" icon="pi pi-bars" class="p-button-rounded" (click)="menu=!menu"></button>
+		</div>
+
+		<div class="mx-2 my-auto">
+			<h1 class="my-auto">LOGO</h1>
+		</div>
+	</div>
+
 </p-menubar>
+
+<div class="card max-w-30rem absolute z-5 max-card" *ngIf="menu">
+	<p-panelMenu #menu [model]="menuItem">
+		<div>
+			<input type="text" pInputText placeholder="Search">
+			<button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
+		</div>
+	</p-panelMenu>
+</div>
